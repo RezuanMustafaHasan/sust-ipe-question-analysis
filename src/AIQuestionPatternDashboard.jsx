@@ -4009,24 +4009,244 @@ export default function CEPQuestionPatternDashboard() {
 }
 
 const dashboardCss = `
-  .dashboard-root {
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  :root {
+    --cep-green: #048c4b;
+    --cep-green-dark: #036638;
+    --cep-green-deep: #03743f;
+    --cep-slate-50: #f8fafc;
+    --cep-slate-100: #f1f5f9;
+    --cep-slate-200: #e2e8f0;
+    --cep-slate-500: #64748b;
+    --cep-slate-600: #475569;
+    --cep-slate-700: #334155;
+    --cep-slate-900: #0f172a;
+    --cep-amber-50: #fffbeb;
+    --cep-amber-200: #fde68a;
+    --cep-amber-600: #d97706;
+    --cep-amber-700: #b45309;
   }
+
+  .dashboard-root {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(4, 140, 75, 0.12), transparent 32rem),
+      linear-gradient(180deg, #f8fafc 0%, var(--cep-slate-100) 100%);
+    color: var(--cep-slate-900);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    padding: 1rem;
+  }
+
   .dashboard-root * { box-sizing: border-box; }
-  .dashboard-root button, .dashboard-root summary, .dashboard-root select { cursor: pointer; }
-  .dashboard-root button:focus-visible, .dashboard-root select:focus-visible {
-    outline: 3px solid rgba(2, 199, 104, 0.35);
+  .dashboard-root h1,
+  .dashboard-root h2,
+  .dashboard-root h3,
+  .dashboard-root p { margin: 0; }
+  .dashboard-root button,
+  .dashboard-root select {
+    font: inherit;
+  }
+  .dashboard-root button {
+    border: 0;
+    background: transparent;
+  }
+  .dashboard-root button,
+  .dashboard-root summary,
+  .dashboard-root select { cursor: pointer; }
+  .dashboard-root select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #64748b 50%), linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.25rem !important;
+  }
+  .dashboard-root button:focus-visible,
+  .dashboard-root select:focus-visible,
+  .dashboard-root summary:focus-visible {
+    outline: 3px solid rgba(4, 140, 75, 0.28);
     outline-offset: 2px;
   }
   .dashboard-root table { border-collapse: separate; }
-  .dashboard-root ::selection { background: rgba(2, 199, 104, 0.16); }
+  .dashboard-root th,
+  .dashboard-root td { vertical-align: top; }
+  .dashboard-root ::selection { background: rgba(4, 140, 75, 0.18); }
   .dashboard-root details[open] summary + div { animation: dashboardSlideDown 180ms ease-out; }
+
   @keyframes dashboardSlideDown {
     from { opacity: 0; transform: translateY(-4px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* Tailwind-style utility fallback so this file works without installing Tailwind CSS. */
+  .dashboard-root [class~="mx-auto"] { margin-left: auto; margin-right: auto; }
+  .dashboard-root [class~="mb-1"] { margin-bottom: 0.25rem; }
+  .dashboard-root [class~="mb-2"] { margin-bottom: 0.5rem; }
+  .dashboard-root [class~="mb-4"] { margin-bottom: 1rem; }
+  .dashboard-root [class~="mb-6"] { margin-bottom: 1.5rem; }
+  .dashboard-root [class~="mt-1"] { margin-top: 0.25rem; }
+  .dashboard-root [class~="mt-2"] { margin-top: 0.5rem; }
+  .dashboard-root [class~="mt-3"] { margin-top: 0.75rem; }
+  .dashboard-root [class~="mt-4"] { margin-top: 1rem; }
+  .dashboard-root [class~="mt-6"] { margin-top: 1.5rem; }
+
+  .dashboard-root [class~="p-2"] { padding: 0.5rem; }
+  .dashboard-root [class~="p-3"] { padding: 0.75rem; }
+  .dashboard-root [class~="p-4"] { padding: 1rem; }
+  .dashboard-root [class~="p-5"] { padding: 1.25rem; }
+  .dashboard-root [class~="p-6"] { padding: 1.5rem; }
+  .dashboard-root [class~="pt-4"] { padding-top: 1rem; }
+  .dashboard-root [class~="px-2.5"] { padding-left: 0.625rem; padding-right: 0.625rem; }
+  .dashboard-root [class~="px-3"] { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .dashboard-root [class~="px-4"] { padding-left: 1rem; padding-right: 1rem; }
+  .dashboard-root [class~="py-1"] { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+  .dashboard-root [class~="py-2"] { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .dashboard-root [class~="py-3"] { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+
+  .dashboard-root [class~="space-y-2"] > * + * { margin-top: 0.5rem; }
+  .dashboard-root [class~="space-y-3"] > * + * { margin-top: 0.75rem; }
+  .dashboard-root [class~="space-y-5"] > * + * { margin-top: 1.25rem; }
+  .dashboard-root [class~="space-y-6"] > * + * { margin-top: 1.5rem; }
+
+  .dashboard-root [class~="flex"] { display: flex; }
+  .dashboard-root [class~="inline-flex"] { display: inline-flex; }
+  .dashboard-root [class~="grid"] { display: grid; }
+  .dashboard-root [class~="flex-wrap"] { flex-wrap: wrap; }
+  .dashboard-root [class~="items-start"] { align-items: flex-start; }
+  .dashboard-root [class~="items-center"] { align-items: center; }
+  .dashboard-root [class~="justify-between"] { justify-content: space-between; }
+  .dashboard-root [class~="justify-center"] { justify-content: center; }
+  .dashboard-root [class~="gap-2"] { gap: 0.5rem; }
+  .dashboard-root [class~="gap-3"] { gap: 0.75rem; }
+  .dashboard-root [class~="gap-4"] { gap: 1rem; }
+  .dashboard-root [class~="gap-6"] { gap: 1.5rem; }
+  .dashboard-root [class~="shrink-0"] { flex-shrink: 0; }
+
+  .dashboard-root [class~="h-2"] { height: 0.5rem; }
+  .dashboard-root [class~="h-7"] { height: 1.75rem; }
+  .dashboard-root [class~="h-8"] { height: 2rem; }
+  .dashboard-root [class~="h-full"] { height: 100%; }
+  .dashboard-root [class~="w-7"] { width: 1.75rem; }
+  .dashboard-root [class~="w-8"] { width: 2rem; }
+  .dashboard-root [class~="w-full"] { width: 100%; }
+  .dashboard-root [class~="max-w-3xl"] { max-width: 48rem; }
+  .dashboard-root [class~="max-w-7xl"] { max-width: 80rem; }
+  .dashboard-root [class~="min-w-[800px]"] { min-width: 800px; }
+
+  .dashboard-root [class~="min-h-screen"] { min-height: 100vh; }
+  .dashboard-root [class~="overflow-hidden"] { overflow: hidden; }
+  .dashboard-root [class~="overflow-x-auto"] { overflow-x: auto; }
+  .dashboard-root [class~="sticky"] { position: sticky; }
+  .dashboard-root [class~="top-0"] { top: 0; }
+  .dashboard-root [class~="z-10"] { z-index: 10; }
+  .dashboard-root [class~="list-none"] { list-style: none; }
+  .dashboard-root [class~="list-none"]::-webkit-details-marker { display: none; }
+  .dashboard-root [class~="cursor-pointer"] { cursor: pointer; }
+
+  .dashboard-root [class~="rounded-xl"] { border-radius: 0.75rem; }
+  .dashboard-root [class~="rounded-2xl"] { border-radius: 1rem; }
+  .dashboard-root [class~="rounded-3xl"] { border-radius: 1.5rem; }
+  .dashboard-root [class~="rounded-full"] { border-radius: 9999px; }
+  .dashboard-root [class~="rounded-l-2xl"] { border-top-left-radius: 1rem; border-bottom-left-radius: 1rem; }
+  .dashboard-root [class~="rounded-r-2xl"] { border-top-right-radius: 1rem; border-bottom-right-radius: 1rem; }
+
+  .dashboard-root [class~="border"] { border-width: 1px; border-style: solid; }
+  .dashboard-root [class~="border-t"] { border-top-width: 1px; border-top-style: solid; }
+  .dashboard-root [class~="border-slate-200"] { border-color: var(--cep-slate-200); }
+  .dashboard-root [class~="border-amber-200"] { border-color: var(--cep-amber-200); }
+  .dashboard-root [class~="border-[#048c4b]/20"] { border-color: rgba(4, 140, 75, 0.2); }
+
+  .dashboard-root [class~="bg-white"] { background-color: #ffffff; }
+  .dashboard-root [class~="bg-white/15"] { background-color: rgba(255, 255, 255, 0.15); }
+  .dashboard-root [class~="bg-white/90"] { background-color: rgba(255, 255, 255, 0.9); }
+  .dashboard-root [class~="bg-slate-50"] { background-color: var(--cep-slate-50); }
+  .dashboard-root [class~="bg-slate-100"] { background-color: var(--cep-slate-100); }
+  .dashboard-root [class~="bg-slate-900"] { background-color: var(--cep-slate-900); }
+  .dashboard-root [class~="bg-amber-50"] { background-color: var(--cep-amber-50); }
+  .dashboard-root [class~="bg-[#048c4b]"] { background-color: var(--cep-green); }
+  .dashboard-root [class~="bg-[#048c4b]/6"] { background-color: rgba(4, 140, 75, 0.06); }
+  .dashboard-root [class~="from-[#048c4b]"] { --tw-gradient-from: var(--cep-green); }
+  .dashboard-root [class~="via-[#048c4b]"] { --tw-gradient-via: var(--cep-green); }
+  .dashboard-root [class~="to-[#036638]"] { --tw-gradient-to: var(--cep-green-dark); }
+  .dashboard-root [class~="to-[#03743f]"] { --tw-gradient-to: var(--cep-green-deep); }
+  .dashboard-root [class~="bg-gradient-to-br"] {
+    background-image: linear-gradient(135deg, var(--tw-gradient-from, var(--cep-green)) 0%, var(--tw-gradient-via, var(--cep-green)) 52%, var(--tw-gradient-to, var(--cep-green-dark)) 100%);
+  }
+
+  .dashboard-root [class~="text-left"] { text-align: left; }
+  .dashboard-root [class~="align-top"] { vertical-align: top; }
+  .dashboard-root [class~="text-xs"] { font-size: 0.75rem; line-height: 1rem; }
+  .dashboard-root [class~="text-sm"] { font-size: 0.875rem; line-height: 1.25rem; }
+  .dashboard-root [class~="text-base"] { font-size: 1rem; line-height: 1.5rem; }
+  .dashboard-root [class~="text-lg"] { font-size: 1.125rem; line-height: 1.75rem; }
+  .dashboard-root [class~="text-xl"] { font-size: 1.25rem; line-height: 1.75rem; }
+  .dashboard-root [class~="text-3xl"] { font-size: 1.875rem; line-height: 2.25rem; }
+  .dashboard-root [class~="font-semibold"] { font-weight: 600; }
+  .dashboard-root [class~="font-bold"] { font-weight: 700; }
+  .dashboard-root [class~="font-black"] { font-weight: 900; }
+  .dashboard-root [class~="uppercase"] { text-transform: uppercase; }
+  .dashboard-root [class~="tracking-wide"] { letter-spacing: 0.025em; }
+  .dashboard-root [class~="tracking-tight"] { letter-spacing: -0.025em; }
+  .dashboard-root [class~="tracking-[0.2em]"] { letter-spacing: 0.2em; }
+  .dashboard-root [class~="leading-6"] { line-height: 1.5rem; }
+
+  .dashboard-root [class~="text-white"] { color: #ffffff; }
+  .dashboard-root [class~="text-white/80"] { color: rgba(255, 255, 255, 0.8); }
+  .dashboard-root [class~="text-white/90"] { color: rgba(255, 255, 255, 0.9); }
+  .dashboard-root [class~="text-slate-500"] { color: var(--cep-slate-500); }
+  .dashboard-root [class~="text-slate-600"] { color: var(--cep-slate-600); }
+  .dashboard-root [class~="text-slate-700"] { color: var(--cep-slate-700); }
+  .dashboard-root [class~="text-slate-900"] { color: var(--cep-slate-900); }
+  .dashboard-root [class~="text-amber-600"] { color: var(--cep-amber-600); }
+  .dashboard-root [class~="text-amber-700"] { color: var(--cep-amber-700); }
+  .dashboard-root [class~="text-[#048c4b]"] { color: var(--cep-green); }
+
+  .dashboard-root [class~="shadow"] { box-shadow: 0 8px 18px rgba(15, 23, 42, 0.14); }
+  .dashboard-root [class~="shadow-sm"] { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 10px 24px rgba(15, 23, 42, 0.04); }
+  .dashboard-root [class~="backdrop-blur"] { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .dashboard-root [class~="transition"] { transition: all 160ms ease; }
+
+  .dashboard-root [class~="border-separate"] { border-collapse: separate; }
+  .dashboard-root [class~="border-spacing-y-2"] { border-spacing: 0 0.5rem; }
+
+  .dashboard-root [class~="hover:bg-white"]:hover { background-color: #ffffff; }
+  .dashboard-root [class~="hover:bg-[#048c4b]/6"]:hover { background-color: rgba(4, 140, 75, 0.06); }
+
+  .dashboard-root details {
+    transition: box-shadow 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+  .dashboard-root details:hover {
+    border-color: rgba(4, 140, 75, 0.28);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+  }
+  .dashboard-root summary { outline: none; }
+  .dashboard-root summary > div { width: 100%; }
+  .dashboard-root b { color: inherit; font-weight: 800; }
+
+  @media (min-width: 768px) {
+    .dashboard-root { padding: 2rem; }
+    .dashboard-root [class~="md:p-8"] { padding: 2rem; }
+    .dashboard-root [class~="md:grid-cols-3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .dashboard-root [class~="md:grid-cols-4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .dashboard-root [class~="md:text-4xl"] { font-size: 2.25rem; line-height: 2.5rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .dashboard-root [class~="lg:grid-cols-2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 767px) {
+    .dashboard-root [class~="text-3xl"] { font-size: 1.625rem; line-height: 2rem; }
+    .dashboard-root [class~="p-6"] { padding: 1.25rem; }
+    .dashboard-root nav { position: static; }
+  }
+
   @media print {
-    .dashboard-root nav, .dashboard-root button { position: static !important; }
-    .dashboard-root { background: white !important; }
+    .dashboard-root nav,
+    .dashboard-root button { position: static !important; }
+    .dashboard-root { background: white !important; padding: 0 !important; }
+    .dashboard-root [class~="shadow-sm"],
+    .dashboard-root [class~="shadow"] { box-shadow: none !important; }
   }
 `;
+
